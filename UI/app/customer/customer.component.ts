@@ -39,9 +39,4 @@ export class CustomerComponent implements OnInit {
     this.customerService.getCustomers(this.customerID)
       .subscribe((data) => this.setCostomerInfo(data));
   }
-
-  onAdd():void{
-    this.customerService.addCustomers(this.customerID);
-  }
-
 }

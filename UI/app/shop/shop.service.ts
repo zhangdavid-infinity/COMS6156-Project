@@ -5,6 +5,13 @@ import { ShopRsp } from "./shop";
 import { Observable } from 'rxjs';
 
 
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':  'application/json',
+    Authorization: 'my-auth-token'
+  })
+};
+
 @Injectable({
   providedIn: 'root'
 })
@@ -38,5 +45,21 @@ export class ShopService {
 
     theUrl = this.getShopServiceUrl() + shopID;
     return this.http.get<Shop>(theUrl);
+  }
+
+  deleteShops(shopID): Observable<Shop> {
+    let theUrl: string;
+    theUrl = this.getShopServiceUrl() + shopID;
+    return  this.http.delete<Shop>(theUrl);
+  }
+  addShops(theShop): Observable<any> {
+    let theUrl: string;
+    theUrl = this.getShopServiceUrl();
+    return  this.http.post<any>(theUrl,theShop,{observe: 'response'});
+  }
+  updateShops(theShop): Observable<any> {
+    let theUrl: string;
+    theUrl = this.getShopServiceUrl();
+    return  this.http.put<any>(theUrl,theShop,{observe: 'response'});
   }
 }

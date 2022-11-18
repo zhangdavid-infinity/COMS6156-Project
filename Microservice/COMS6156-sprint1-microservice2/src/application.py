@@ -30,29 +30,70 @@ def get_health():
     return result
 
 
-@app.route("/api/shops/<shopID>", methods=["GET"])
-def get_shop_by_shopID(shopID):
+@app.route("/api/shop/<shopID>", methods=["GET","DELETE","PUT"])
+def change_shop_by_shopID(shopID):
 
-    result = ShopResource.get_by_key(shopID)
+    if request.method == 'GET':
 
-    if result:
-        rsp = Response(json.dumps(result), status=200, content_type="application.json")
-    else:
-        rsp = Response("NOT FOUND", status=404, content_type="text/plain")
+        result = ShopResource.get_by_key(shopID)
 
-    return rsp
+        if result:
+            rsp = Response(json.dumps(result), status=200, content_type="application.json")
+        else:
+            rsp = Response("NOT FOUND", status=404, content_type="text/plain")
 
-@app.route("/api/order/<orderID>", methods=["GET"])
-def get_shop_by_orderID(orderID):
+        return rsp
+    elif request.method == 'DELETE':
+
+        result = ShopResource.delete_by_key(shopID)
+
+        if result:
+            rsp = Response(json.dumps(result), status=200, content_type="application.json")
+        else:
+            rsp = Response("NOT FOUND", status=404, content_type="text/plain")
+
+        return rsp
+
+
+@app.route("/api/shop/", methods=["POST",'PUT'])
+def update_shop():
+    if request.method == 'POST':
+        shop = request.get_json()
+        result = ShopResource.add(shop)
+
+        if result:
+            rsp = Response(json.dumps(result), status=200, content_type="application.json")
+        else:
+            rsp = Response("Internal server error", status=500, content_type="text/plain")
+
+        return rsp
+
+    elif request.method == 'PUT':
+        shop = request.get_json()
+        result = ShopResource.update(shop)
+
+        if result:
+            rsp = Response(json.dumps(result), status=200, content_type="application.json")
+        else:
+            rsp = Response("Internal server error", status=500, content_type="text/plain")
+
+        return rsp
+
+
+
+def get_order_by_orderID(orderID):
 
     result = OrderResource.get_by_key(orderID)
 
     if result:
         rsp = Response(json.dumps(result), status=200, content_type="application.json")
     else:
-        rsp = Response("NOT FOUND", status=404, content_type="text/plain")
+        rsp = Response("Internal server error", status=500, content_type="text/plain")
 
     return rsp
+
+
+
 
 @app.route("/api/product/<productID>", methods=["GET"])
 def get_product_by_productID(productID):

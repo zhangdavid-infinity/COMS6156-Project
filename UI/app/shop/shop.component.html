@@ -19,7 +19,8 @@
                                                     [(ngModel)]="shopID">
           <p></p>
             <button type="button" (click)="onLookup()" class="btn btn-primary">Search</button>
-          <!-- You typed: <span *ngIf="artistName"> "{{ artistName }}" </span> -->
+          <button type="button" (click)="onShowAdd()" class="btn btn-primary">Add</button>
+          <div>{{notice}}</div>
           <p></p>
           <table class="table table-striped">
             <thead>
@@ -32,6 +33,35 @@
             </tr>
             </thead>
             <tbody>
+            <tr class="card-body" *ngIf="toggleAdd">
+
+              <td><input type="text" class="form-control"
+                                                    [(ngModel)]="addShopID"></td>
+
+              <td><input type="text" class="form-control"
+                                                    [(ngModel)]="addName "></td>
+              <td><input type="text" class="form-control"
+                                                    [(ngModel)]="addPhone"></td>
+              <td><input type="text" class="form-control"
+                                                    [(ngModel)]="addEmail"></td>
+              <td><input type="text" class="form-control"
+                                                    [(ngModel)]="addAddress"></td>
+              <td><button type="button" (click)="onAdd()" class="btn btn-primary">Add</button></td>
+            </tr>
+
+            <tr class="card-body" *ngIf="toggleUpdate">
+              <td>{{updateShopID}}</td>
+
+              <td><input type="text" class="form-control"
+                                                    [(ngModel)]="updateName "></td>
+              <td><input type="text" class="form-control"
+                                                    [(ngModel)]="updatePhone"></td>
+              <td><input type="text" class="form-control"
+                                                    [(ngModel)]="updateEmail"></td>
+              <td><input type="text" class="form-control"
+                                                    [(ngModel)]="updateAddress"></td>
+              <td><button type="button" (click)="onUpdate()" class="btn btn-primary">Update</button></td>
+            </tr>
             <tr *ngFor="let p of shopsInfo; index as i">
               <td>
                 {{ p.shopID }}
@@ -40,8 +70,8 @@
               <td>{{ p.phone }}</td>
               <td>{{ p.email }}</td>
               <td>{{p.address }}</td>
-              <td><button type="button" (click)="onLookup()" class="btn btn-primary">Delete</button></td>
-              <td><button type="button" (click)="onLookup()" class="btn btn-primary">Search</button></td>
+              <td><button type="button" (click)="onDelete(p.shopID)"  class="btn btn-primary">Delete</button></td>
+              <td><button type="button" (click)="onShowUpdate(p.shopID)" class="btn btn-primary">Search</button></td>
             </tr>
             </tbody>
           </table>
