@@ -1,10 +1,9 @@
 export class Customer {
-  guid: string;
-  last_name: string;
-  first_name: string;
-  middle_name: string;
-  email: string;
-  school_code;
+  emailID: string;
+  username: string;
+  firstname: string;
+  lastname: string;
+  phone: string;
 }
 
 export class CustomerRsp {

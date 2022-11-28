@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Customer } from './customer';
 import { CustomerRsp } from "./customer";
-import { Observable } from 'rxjs';
-
+import { Observable } from 'rxjs';;
 
 
 @Injectable({
@@ -29,7 +28,7 @@ export class CustomerService {
       result = undefined;
     }
     else {
-      result = 'http://127.0.0.1:5011/api/customers/';
+      result = 'http://127.0.0.1:5011/api/customer/';
     }
     return result;
   }
@@ -39,6 +38,21 @@ export class CustomerService {
 
     theUrl = this.getCustomerServiceUrl() + customerID;
     return this.http.get<Customer>(theUrl);
+  }
+  deleteCustomers(customerID): Observable<Customer> {
+    let theUrl: string;
+    theUrl = this.getCustomerServiceUrl() + customerID;
+    return  this.http.delete<Customer>(theUrl);
+  }
+  addCustomers(theCustomer): Observable<any> {
+    let theUrl: string;
+    theUrl = this.getCustomerServiceUrl();
+    return  this.http.post<any>(theUrl, theCustomer, {observe: 'response'});
+  }
+  updateCustomers(theCustomer): Observable<any> {
+    let theUrl: string;
+    theUrl = this.getCustomerServiceUrl();
+    return  this.http.put<any>(theUrl, theCustomer, {observe: 'response'});
   }
 
 
