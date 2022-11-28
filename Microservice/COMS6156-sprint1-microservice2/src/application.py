@@ -46,12 +46,11 @@ def change_shop_by_shopID(shopID):
     elif request.method == 'DELETE':
 
         result = ShopResource.delete_by_key(shopID)
-
         if result:
-            rsp = Response(json.dumps(result), status=200, content_type="application.json")
+            rsp = Response(json.dumps({'status':200}), status=200, content_type="application.json")
         else:
             rsp = Response("NOT FOUND", status=404, content_type="text/plain")
-
+        print(rsp)
         return rsp
 
 

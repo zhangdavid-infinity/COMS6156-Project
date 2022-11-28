@@ -55,8 +55,11 @@ export class ShopComponent implements OnInit {
   onLookup(): void {
     if(this.shopID.length>0) {
       this.toggleUpdate=false;
+      this.shopsInfo=[];
       this.shopService.getShops(this.shopID)
-        .subscribe((data) => this.setShopInfo(data));
+        .subscribe((data) => {
+          this.setShopInfo(data);
+        });
     }
     else {
       this.shopsInfo=[];
@@ -74,7 +77,7 @@ export class ShopComponent implements OnInit {
     theShop.phone=this.addPhone;
     this.shopService.addShops(theShop)
       .subscribe((response:any) => {
-        if(response.status==200){
+        if (response.status === 200){
           this.toggleAdd=false;
           this.notice='Add success!';
         }
@@ -97,7 +100,8 @@ export class ShopComponent implements OnInit {
     theShop.phone=this.updatePhone;
     this.shopService.updateShops(theShop)
       .subscribe((response:any) => {
-        if(response.status==200){
+        console.log(response.status);
+        if(response.status===200){
           this.toggleUpdate=false;
           this.notice='Update success!';
           this.onLookup();
@@ -108,9 +112,9 @@ export class ShopComponent implements OnInit {
       });
   }
   onDelete(shopID): void {
-    console.log(shopID);
     this.shopService.deleteShops(shopID) .subscribe((response:any) => {
-        if(response.status==200){
+        console.log(response.status);
+        if(response.status===200){
           this.onLookup();
           this.notice='Delete success!';
         }
