@@ -57,8 +57,11 @@ export class CustomerComponent implements OnInit {
     //   .subscribe((data) => this.setCostomerInfo(data));
     if(this.emailID.length>0) {
       this.toggleUpdate=false;
+      this.customersInfo = [];
       this.customerService.getCustomers(this.emailID)
-        .subscribe((data) => this.setCustomerInfo(data));
+        .subscribe((data) => {
+          this.setCustomerInfo(data);
+        });
     }
     else {
       this.customersInfo=[];
@@ -78,7 +81,7 @@ export class CustomerComponent implements OnInit {
     theCustomer.phone = this.addPhone;
     this.customerService.addCustomers(theCustomer)
       .subscribe((response:any) => {
-        if(response.status==200){
+        if(response.status===200){
           this.toggleAdd=false;
           this.notice='Add success!';
         }
@@ -102,7 +105,7 @@ export class CustomerComponent implements OnInit {
     theCustomer.phone = this.updatePhone;
     this.customerService.updateCustomers(theCustomer)
       .subscribe((response:any) => {
-        if(response.status==200){
+        if(response.status===200){
           this.toggleUpdate=false;
           this.notice='Update success!';
           this.onLookup();
