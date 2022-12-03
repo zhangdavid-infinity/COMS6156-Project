@@ -10,7 +10,6 @@ application = Flask(__name__)
 CORS(application)
 
 
-# Account
 @application.route("/api/account/<emailID>", methods=["GET", "DELETE"])
 def get_or_delete_account(emailID):
     if request.method == "GET":

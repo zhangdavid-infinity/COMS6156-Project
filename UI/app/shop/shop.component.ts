@@ -8,7 +8,6 @@ import {Shop} from "./shop";
   styleUrls: ['./shop.component.css']
 })
 export class ShopComponent implements OnInit {
-
   shopID: string;
   addShopID: string;
   addName: string;
@@ -56,7 +55,7 @@ export class ShopComponent implements OnInit {
     if(this.shopID.length>0) {
       this.toggleUpdate=false;
       this.shopsInfo=[];
-      this.shopService.getShops(this.shopID)
+      this.shopService.getOrder(this.shopID)
         .subscribe((data) => {
           this.setShopInfo(data);
         });

@@ -12,42 +12,65 @@
                       aria-expanded="true" aria-controls="collapse1" (click)="toggleCard('customer')">
                 <!-- Hello -->
                 <i class="fa fa-plus-square" style="font-size:18px;color:black"></i></button>
-
-
-
-
-
             </div>
           </div>
         </div>
-        <div class="card-body" *ngIf="toggleCustomer">Type in your Customer ID : <input type="text" class="form-control"
-                                                    [(ngModel)]="customerID">
+        <div class="card-body" *ngIf="toggleCustomer">Type in Email ID : <input type="text" class="form-control"
+                                                    [(ngModel)]="emailID">
           <p></p>
             <button type="button" (click)="onLookup()" class="btn btn-primary">Search</button>
-          <button type="button" (click)="onAddCustomer()" class="btn btn-primary">ADD</button>
-          <!-- You typed: <span *ngIf="artistName"> "{{ artistName }}" </span> -->
+          <button type="button" (click)="onShowAdd()" class="btn btn-primary">Add</button>
+          <div>{{notice}}</div>
           <p></p>
           <table class="table table-striped">
             <thead>
             <tr>
-              <th scope="col">Student ID</th>
-              <th scope="col">Last name</th>
-              <th scope="col">First name</th>
-              <th scope="col">Middle name</th>
-              <th scope="col">Email</th>
-              <th scope="col">School code</th>
+              <th scope="col">Email Id</th>
+              <th scope="col">User Name</th>
+              <th scope="col">First Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">Phone</th>
             </tr>
             </thead>
             <tbody>
+            <tr class="card-body" *ngIf="toggleAdd">
+              <td><input type="text" class="form-control"
+                                                    [(ngModel)]="addEmailId"></td>
+
+              <td><input type="text" class="form-control"
+                                                    [(ngModel)]="addUserName "></td>
+              <td><input type="text" class="form-control"
+                                                    [(ngModel)]="addFirstName"></td>
+              <td><input type="text" class="form-control"
+                                                    [(ngModel)]="addLastName"></td>
+              <td><input type="text" class="form-control"
+                                                    [(ngModel)]="addPhone"></td>
+              <td><button type="button" (click)="onAdd()" class="btn btn-primary">Add</button></td>
+            </tr>
+
+            <tr class="card-body" *ngIf="toggleUpdate">
+              <td>{{updateEmailID}}</td>
+
+              <td><input type="text" class="form-control"
+                                                    [(ngModel)]="updateUserName "></td>
+              <td><input type="text" class="form-control"
+                                                    [(ngModel)]="updateFirstName"></td>
+              <td><input type="text" class="form-control"
+                                                    [(ngModel)]="updateLastName"></td>
+              <td><input type="text" class="form-control"
+                                                    [(ngModel)]="updatePhone"></td>
+              <td><button type="button" (click)="onUpdate()" class="btn btn-primary">Update</button></td>
+            </tr>
             <tr *ngFor="let p of customersInfo; index as i">
               <td>
-                {{ p.guid }}
+                {{ p.emailID }}
               </td>
-              <td>{{p.last_name }}</td>
-              <td>{{ p.first_name }}</td>
-              <td>{{p.middle_name }}</td>
-              <td>{{ p.email }}</td>
-              <td>{{p.school_code }}</td>
+              <td>{{p.username }}</td>
+              <td>{{ p.firstname }}</td>
+              <td>{{ p.lastname }}</td>
+              <td>{{p.phone }}</td>
+              <td><button type="button" (click)="onDelete(p.emailID)" class="btn btn-primary">Delete</button></td>
+              <td><button type="button" (click)="onShowUpdate(p.emailID)" class="btn btn-primary">Update</button></td>
             </tr>
             </tbody>
           </table>
