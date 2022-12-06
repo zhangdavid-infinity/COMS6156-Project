@@ -24,10 +24,10 @@ export class ProductService {
     // If you do this on a job interview, you did not learn this in my class.
     if (theUrl.includes('amazonaws')) {
       /* This can change over time */
-      result = 'http://127.0.0.1:5011/api/product/';
+      result = 'http://34.203.227.98:5011/api/product/';
     }
     else {
-      result = 'http://127.0.0.1:5011/api/product/';
+      result = 'http://34.203.227.98:5011/api/product/';
     }
     return result;
   }
