@@ -25,10 +25,10 @@ export class CustomerService {
     // If you do this on a job interview, you did not learn this in my class.
     if (theUrl.includes('amazonaws')) {
       /* This can change over time */
-      result = 'https://34.203.227.98:5011/api/customer/';
+      result = 'http://34.203.227.98:5011/api/customer/';
     }
     else {
-      result = 'https://34.203.227.98:5011/api/customer/';
+      result = 'http://34.203.227.98:5011/api/customer/';
     }
     return result;
   }

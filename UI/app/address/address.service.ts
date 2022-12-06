@@ -23,10 +23,10 @@ export class AddressService {
     // If you do this on a job interview, you did not learn this in my class.
     if (theUrl.includes('amazonaws')) {
       /* This can change over time */
-      result = 'https://34.203.227.98:5011/api/address/';
+      result = 'http://34.203.227.98:5011/api/address/';
     }
     else {
-      result = 'https://34.203.227.98:5011/api/address/';
+      result = 'http://34.203.227.98:5011/api/address/';
     }
     return result;
   }
