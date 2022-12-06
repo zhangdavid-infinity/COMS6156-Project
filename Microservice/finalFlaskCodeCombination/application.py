@@ -14,6 +14,9 @@ app = Flask(__name__)
 
 CORS(app)
 
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5011, ssl_context = 'adhoc')
+
 @app.route("/api/shop/<shopID>", methods=["GET","DELETE","PUT"])
 def change_shop_by_shopID(shopID):
 
