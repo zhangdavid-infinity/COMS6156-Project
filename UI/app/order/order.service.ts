@@ -24,7 +24,7 @@ export class OrderService {
     // If you do this on a job interview, you did not learn this in my class.
     if (theUrl.includes('amazonaws')) {
       /* This can change over time */
-      result = undefined;
+      result = 'http://127.0.0.1:5011/api/order/';
     }
     else {
       result = 'http://127.0.0.1:5011/api/order/';
