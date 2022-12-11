@@ -5,6 +5,7 @@ from shop_resource import ShopResource
 from order_resource import OrderResource
 from product_resource import ProductResource
 from flask_cors import CORS
+from sns import NotificationMiddlewareHandler
 
 # Create the Flask application object.
 app = Flask(__name__,
@@ -13,6 +14,7 @@ app = Flask(__name__,
             template_folder='web/templates')
 
 CORS(app)
+
 
 
 @app.get("/api/health")
@@ -62,8 +64,20 @@ def update_shop():
 
         if result:
             rsp = Response(json.dumps(result), status=200, content_type="application.json")
+            sns = NotificationMiddlewareHandler.get_sns_client()
+            print("Got SNS Client!")
+            tps = NotificationMiddlewareHandler.get_sns_topics()
+            print("SNS Topics = \n", json.dumps(tps, indent=2))
+
+            message = {"test": "new shop created"}
+            NotificationMiddlewareHandler.send_sns_message(
+                "arn:aws:sns:us-east-1:606830512180:6156-shop",
+                message
+            )
+
         else:
             rsp = Response("Internal server error", status=500, content_type="text/plain")
+
 
         return rsp
 
