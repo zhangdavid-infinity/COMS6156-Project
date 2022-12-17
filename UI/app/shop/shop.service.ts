@@ -25,10 +25,10 @@ export class ShopService {
     // If you do this on a job interview, you did not learn this in my class.
     if (theUrl.includes('amazonaws')) {
       /* This can change over time */
-      result = 'http://34.203.227.98:5011/api/shop/';
+      result = 'http://ec2-3-83-94-111.compute-1.amazonaws.com:5011/api/shop/';
     }
     else {
-      result = 'http://34.203.227.98:5011/api/shop/';
+      result = 'http://ec2-3-83-94-111.compute-1.amazonaws.com:5011/api/shop/';
     }
     return result;
   }

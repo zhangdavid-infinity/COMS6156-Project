@@ -7,5 +7,5 @@ export class Customer {
 }
 
 export class CustomerRsp {
-  data: Customer
+  data: Customer;
 }

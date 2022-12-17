@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AddressService} from "./address.service";
 import {Address} from "./address";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-address',
@@ -78,12 +79,19 @@ export class AddressComponent implements OnInit {
     theAddress.zip = this.addZip;
     this.addressService.addAddress(theAddress)
       .subscribe((response:any) => {
-        if (response.status === 200){
-          this.toggleAdd=false;
-          this.notice='Add success!';
+        if (response.status === 200) {
+          this.toggleAdd = false;
+          this.notice = 'Add success!';
+        }
+      },( err:HttpErrorResponse)=>{
+        console.log(err.message);
+
+        console.log(err.error);
+        if (err.error=='Wrong address error'){
+          this.notice = 'Add Fail: '+err.error;
         }
         else{
-          this.notice='Add fail!';
+          this.notice = 'Add Fail!';
         }
       });
   }
@@ -108,10 +116,18 @@ export class AddressComponent implements OnInit {
           this.notice='Update success!';
           this.onLookup();
         }
-        else{
-          this.notice='Update fail!';
+      },( err:HttpErrorResponse)=>{
+        console.log(err.message);
+
+        console.log(err.error);
+        if (err.error=='Wrong address error'){
+          this.notice = 'Update Fail: '+err.error;
         }
-      });
+        else{
+          this.notice = 'Update Fail!';
+        }
+      }
+      );
   }
   onDelete(id): void {
     this.addressService.deleteAddress(id) .subscribe((response:any) => {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ShopService} from "./shop.service";
 import {Shop} from "./shop";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 
 @Component({
   selector: 'app-shop',
@@ -76,14 +77,22 @@ export class ShopComponent implements OnInit {
     theShop.phone=this.addPhone;
     this.shopService.addShops(theShop)
       .subscribe((response:any) => {
-        if (response.status === 200){
-          this.toggleAdd=false;
-          this.notice='Add success!';
+        if (response.status === 200) {
+          this.toggleAdd = false;
+          this.notice = 'Add success!';
+        }
+      },( err:HttpErrorResponse)=>{
+        console.log(err.message);
+
+        console.log(err.error);
+        if (err.error=='Wrong address error'){
+          this.notice = 'Add Fail: '+err.error;
         }
         else{
-          this.notice='Add fail!';
+          this.notice = 'Add Fail!';
         }
       });
+
   }
 
   onShowUpdate(shopID): void {
@@ -105,10 +114,18 @@ export class ShopComponent implements OnInit {
           this.notice='Update success!';
           this.onLookup();
         }
-        else{
-          this.notice='Update fail!';
+      },( err:HttpErrorResponse)=>{
+        console.log(err.message);
+
+        console.log(err.error);
+        if (err.error=='Wrong address error'){
+          this.notice = 'Update Fail: '+err.error;
         }
-      });
+        else{
+          this.notice = 'Update Fail!';
+        }
+      }
+      );
   }
   onDelete(shopID): void {
     this.shopService.deleteShops(shopID) .subscribe((response:any) => {

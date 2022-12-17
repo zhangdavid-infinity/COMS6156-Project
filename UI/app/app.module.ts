@@ -15,6 +15,7 @@ import { ShopComponent } from './shop/shop.component';
 import { ProductComponent } from './product/product.component';
 import { OrderComponent } from './order/order.component';
 import { AddressComponent } from './address/address.component';
+import { CompositeComponent } from './composite/composite.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { AddressComponent } from './address/address.component';
     ShopComponent,
     ProductComponent,
     OrderComponent,
-    AddressComponent
+    AddressComponent,
+    CompositeComponent
   ],
     imports: [
         BrowserModule,

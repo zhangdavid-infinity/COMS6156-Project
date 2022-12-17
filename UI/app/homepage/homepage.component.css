@@ -13,11 +13,9 @@ box-shadow: -1px 1px 1px 1px black;
 margin: 20px 0px 40px 0px;
 }
 .home_box{
-color:white;
-text-align: center;
-background-color: red;
-border-radius: 5px;
-padding:0px 10px 0px 10px;
+color: #111; font-family: 'Helvetica Neue', sans-serif; font-size: 75px; font-weight: bold; letter-spacing: -1px; line-height: 1; text-align: center;
+  margin-top: 160px;
+  margin-bottom: 40px;
 }
 .p{
 

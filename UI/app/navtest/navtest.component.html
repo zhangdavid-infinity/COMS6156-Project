@@ -37,6 +37,12 @@
       <app-order></app-order>
     </ng-template>
   </li>
+  <li [ngbNavItem]="7">
+    <a ngbNavLink>Customer*</a>
+    <ng-template ngbNavContent>
+      <app-composite></app-composite>
+    </ng-template>
+  </li>
 </ul>
 
 <div [ngbNavOutlet]="nav" class="mt-2"></div>
