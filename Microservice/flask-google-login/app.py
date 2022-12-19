@@ -20,9 +20,11 @@ from db import init_db_command
 from user import User
 
 # Configuration
-GOOGLE_CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID", None)
+# GOOGLE_CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID", None)
 # GOOGLE_CLIENT_SECRET = os.environ.get("GOOGLE_CLIENT_SECRET", None)
-GOOGLE_CLIENT_SECRET = os.environ.get("GOOGLE_CLIENT_SECRET", None)
+GOOGLE_CLIENT_ID = "884647360293-b86d0287p2hftqe8r9fbn0a92e8mjsta.apps.googleusercontent.com"
+# GOOGLE_CLIENT_SECRET = os.environ.get("GOOGLE_CLIENT_SECRET", None)
+GOOGLE_CLIENT_SECRET = "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"
 GOOGLE_DISCOVERY_URL = (
     "https://accounts.google.com/.well-known/openid-configuration"
 )
@@ -84,15 +86,22 @@ def login():
     # scopes that let you retrieve user's profile from Google
     request_uri = client.prepare_request_uri(
         authorization_endpoint,
-        redirect_uri=request.base_url + "/callback",
-        scope=["openid", "email", "profile"],
+        #redirect_uri="https://tg1on4hcz7.execute-api.us-east-1.amazonaws.com/dev/callback",
+        #redirect_uri="https://54.226.75.227:5000/login/callback",
+        redirect_uri="https://clarence-google.tk",
+        scope=["openid","email","profile"],
     )
+    print(request_uri)
     return redirect(request_uri)
 
 
-@app.route("/login/callback")
+@app.route("/callback")
 def callback():
+    '''
     # Get authorization code Google sent back to you
+    print("!!!!@D")
+
+    print("!!!!@D")
     code = request.args.get("code")
 
     # Find out what URL to hit to get tokens that allow you to ask for
@@ -149,7 +158,10 @@ def callback():
     login_user(user)
 
     # Send user back to homepage
-    return redirect(url_for("index"))
+    '''
+    return redirect("http://6156ui.s3-website-us-east-1.amazonaws.com")
+    #return redirect(url_for("index"))
+
 
 
 @app.route("/logout")
