@@ -88,7 +88,9 @@ def login():
         authorization_endpoint,
         #redirect_uri="https://tg1on4hcz7.execute-api.us-east-1.amazonaws.com/dev/callback",
         #redirect_uri="https://54.226.75.227:5000/login/callback",
-        redirect_uri="https://clarence-google.tk",
+        # redirect_uri="https://clarence-google.tk",
+        # redirect_uri="https://4ehf9l3kqi.execute-api.us-east-1.amazonaws.com/dev/callback",
+        redirect_uri="http://6156ui.s3-website-us-east-1.amazonaws.com",
         scope=["openid","email","profile"],
     )
     print(request_uri)
