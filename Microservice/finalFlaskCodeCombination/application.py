@@ -10,6 +10,7 @@ from membership_resource import MembershipResource
 from flask_cors import CORS
 from smartystreets_python_sdk import StaticCredentials, exceptions, ClientBuilder
 from smartystreets_python_sdk.us_street import Lookup
+from composite_resource import CompositeResource
 
 smartystreet_auth_id = "70b15887-070e-9ea2-3b30-093a216b0ba4"
 smartystreet_auth_token = "HUL2wtOv89nE35qo1NBS"
@@ -286,7 +287,26 @@ def evaluate(address):
         return False
     return True
 
+@app.route("/api/composite/<emailID>", methods=["GET"])
+def get_composite(emailID):
+    if request.method == "GET":
+        result = CompositeResource.get_composite_by_emailID(emailID)
 
+        if result:
+            rsp = Response(json.dumps(result), status=200, content_type="application.json")
+        else:
+            rsp = Response("NOT FOUND", status=404, content_type="text/plain")
+
+    # elif request.method == "DELETE":
+    #
+    #     result = CustomerResource.delete_customer_by_emailID(emailID)
+    #
+    #     if result:
+    #         rsp = Response(json.dumps({'status': 200}), status = 200, content_type="application.json")
+    #     else:
+    #         rsp = Response("NOT FOUND", status=404, content_type="text/plain")
+
+    return rsp
 
 
 #
